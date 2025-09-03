@@ -26,7 +26,7 @@ int main(){
                     /*if(stat){
                         printf("\nThis is the biggest value so far %f\n", biggestNum);
                         printf("\nThis is the biggest value's location %f\n", biggestNumLocation);
-                    }                       THIS IF CHECKS FOR THE PROGRAMS FUNCTIONALITY USE ONLY IF NECESARY*/             
+                    } THIS IF CHECKS FOR THE PROGRAMS FUNCTIONALITY USE ONLY IF NECESARY*/             
         }/*if brackets*/
         else{
             continue;
