@@ -5,7 +5,6 @@
 /*variables*/
 bool out = true;
 int option;
-
 bool end = true;
 int top = 0;
 int inValue = 0;
