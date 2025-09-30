@@ -144,10 +144,12 @@ void owModule(int pos){
             if(creatorAux!=NULL){
                 creatorAux->next = newNode;
                 newNode->before = creatorAux;
+                newNode -> next = NULL;
             }
             else{
                 head = newNode;
                 head->before = NULL;
+                head->next = NULL;
             }
             creatorAux = newNode;
             i++;
@@ -192,6 +194,12 @@ void elimNode(){
             }
             memClear = aux -> next;
             aux -> next = memClear->next;
+            if(memClear->next!=NULL){
+                memClear->next->before = aux;
+                 /*Here we are jumping over the value of memClear, 
+                which will be deleated. After that happens we need to have the next nodes point backwards
+                after deletion of the previous place they used to point to*/
+            }
             free(memClear);
         }
     }
@@ -205,22 +213,22 @@ void showPrevVal(){
     }
     else{
         Node *aux = head;
-        int i = 1;
+        int j = 1;
         int pos = 0;
         showModules();//TEST
         while(aux!=NULL){
-            printf("\nNODE %d", i);
+            printf("\nNODE %d", j);
             aux = aux->next;
-            i++;
+            j++;
         }
-        i=1;
+        j=1;
         aux = head;
         while(aux->next!=NULL){
-                aux = aux->next; 
-                i++; 
+                aux = aux->next;  
             }//Finding the last node in order to join it with head->before
+            Node *last = aux; //
             head->before = aux;
-            aux->next = head;
+            last->next = head;
         printf("\n\nPlease write the position of the node you would like to know the previous value of:  ");
         scanf("%d", &pos);
         if(pos == 1){//THIS WILL MEAN THAT THE VALUE WE WANT TO KNOW IS THE LAST FROM HEAD
@@ -228,17 +236,20 @@ void showPrevVal(){
             printf("\n\nThe value before the first node is %d", head->before->data);
         }
         else{
+            int i = 1;
             printf("\n\nWe have made a cycle out of all of the nodes in the list. \n\nThe present case will show the value behind the node at %d ", pos);
             Node *aux2 = head;
-            while(aux2->next != NULL && i<pos){
-                aux2 = aux2->next;
-                i++;
-            }//Searching for the required node
-            Node *tempAux = aux2->before;
-            printf("\n\nThe previous value to the node at position %d, is %d", pos, tempAux->before->data);
+                while(aux2->next != NULL && i<pos){
+                    aux2 = aux2->next;
+                    i++;
+                }//Searching for the required node
+            if(aux2==NULL){
+                printf("\n\nThe node does not exist! \tSORRY");
+            }
+            printf("\n\nThe previous value to the node at position %d, is %d", pos, aux2->before->data);
         }
         head->before = NULL;
-        aux->next = NULL;
+        last->next = NULL;
         //UNLINKING THE CIRCULAR LIST
     }
 }
