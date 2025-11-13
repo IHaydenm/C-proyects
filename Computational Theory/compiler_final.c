@@ -1,22 +1,8 @@
-/* compiler.c
-   Merged lexical analyzer + parser + semantic analyzer
-   Compile:
-     gcc -std=c99 -O2 -o compiler compiler.c
-   Run:
-     ./compiler input.txt
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdarg.h>
-
-/* ===========================
-   LEXER (adapted from lexAnalyzer.c)
-   - We use this scanner to produce low-level lexer tokens (LToken)
-   - Then map LToken -> parser Token (the semantic analyzer expects a specific TokenType)
-   =========================== */
 
 typedef enum {
     L_T_ID, L_T_KEYWORD, L_T_INT_LITERAL, L_T_FLOAT_LITERAL, L_T_STRING_LITERAL, L_T_STRUCT_LITERAL,
